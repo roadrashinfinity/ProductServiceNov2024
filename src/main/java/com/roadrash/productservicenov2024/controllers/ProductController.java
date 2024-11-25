@@ -1,6 +1,8 @@
 package com.roadrash.productservicenov2024.controllers;
 
 import com.roadrash.productservicenov2024.dto.CreateProductFakeStoreDto;
+import com.roadrash.productservicenov2024.dto.ErrorDTO;
+import com.roadrash.productservicenov2024.exceptions.ProductNotFoundException;
 import com.roadrash.productservicenov2024.models.Product;
 import com.roadrash.productservicenov2024.services.ProductService;
 import org.springframework.http.HttpStatus;
@@ -26,14 +28,15 @@ public class ProductController {
 
     //Single Product
     @GetMapping("/products/{id}")
-    public ResponseEntity<Product> getSingleProduct(@PathVariable("id") int id){
+    public ResponseEntity<Product> getSingleProduct(@PathVariable("id") int id) throws ProductNotFoundException {
         Product p= productService.getSingleProduct(id);
-
-        if(p==null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        ResponseEntity<Product> responseEntity;
+        if(p == null){
+            responseEntity = new ResponseEntity<>(p, HttpStatus.NOT_FOUND);
+        }else{
+            responseEntity = new ResponseEntity<>(p, HttpStatus.OK);
         }
 
-        ResponseEntity<Product> responseEntity=new ResponseEntity<>(p, HttpStatus.OK);
         return responseEntity;
     }
 
@@ -47,4 +50,7 @@ public class ProductController {
                 CreateProductFakeStoreDto.getPrice());
 
     }
+
+
+
 }
