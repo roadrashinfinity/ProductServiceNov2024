@@ -1,6 +1,6 @@
 package com.roadrash.productservicenov2024.controllers;
 
-import com.roadrash.productservicenov2024.dto.CreateProductFakeStroreDto;
+import com.roadrash.productservicenov2024.dto.CreateProductFakeStoreDto;
 import com.roadrash.productservicenov2024.models.Product;
 import com.roadrash.productservicenov2024.services.ProductService;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +28,13 @@ public class ProductController {
     }
 
     //createProduct
-    @PostMapping("/prouducs")
-    public Product createProduct(@RequestBody CreateProductFakeStroreDto CreateProductFakeStroreDto){
-        return productService.createProduct(CreateProductFakeStroreDto);
+    @PostMapping("/products")
+    public Product createProduct(@RequestBody CreateProductFakeStoreDto CreateProductFakeStoreDto){
+        return productService.createProduct(CreateProductFakeStoreDto.getTitle(),
+                CreateProductFakeStoreDto.getDescription(),
+                CreateProductFakeStoreDto.getImage(),
+                CreateProductFakeStoreDto.getCategory(),
+                CreateProductFakeStoreDto.getPrice());
+
     }
 }
