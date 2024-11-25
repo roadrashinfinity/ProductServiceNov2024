@@ -19,7 +19,7 @@ public class FakeStoreProductDTO {
     public Product toProduct() {
         Product product = new Product();
 
-        product.setName(title);
+        product.setTitle(title);
         product.setDescription(description);
         product.setPrice(price);
         product.setImageUrl(image);
