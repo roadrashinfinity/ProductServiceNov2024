@@ -2,6 +2,7 @@ package com.roadrash.productservicenov2024.services;
 
 import com.roadrash.productservicenov2024.dto.FakeStoreProductDTO;
 import com.roadrash.productservicenov2024.models.Product;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -32,7 +33,10 @@ public class FakeStoreProductService implements ProductService{
 
     @Override
     public Product getSingleProduct(int id) {
-        FakeStoreProductDTO fakeStoreProductDTO =restTemplate.getForObject("https://fakestoreapi.com/products/"+id, FakeStoreProductDTO.class);
+        //
+        ResponseEntity<FakeStoreProductDTO> fakeStoreProductDTOResponseEntity =restTemplate.getForEntity("https://fakestoreapi.com/products/"+id,FakeStoreProductDTO.class);
+        FakeStoreProductDTO fakeStoreProductDTO = fakeStoreProductDTOResponseEntity.getBody();
+
         return fakeStoreProductDTO.toProduct();
     }
 
