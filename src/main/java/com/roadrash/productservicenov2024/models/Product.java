@@ -1,6 +1,7 @@
 package com.roadrash.productservicenov2024.models;
 
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -19,8 +20,7 @@ public class Product extends BaseModel{
     private String description;
     private double price;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     private Category category;
     private String imageUrl;
 }
