@@ -5,6 +5,8 @@ import com.roadrash.productservicenov2024.dto.ErrorDTO;
 import com.roadrash.productservicenov2024.exceptions.ProductNotFoundException;
 import com.roadrash.productservicenov2024.models.Product;
 import com.roadrash.productservicenov2024.services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +17,11 @@ import java.util.List;
 @RestController
 public class ProductController {
 
+
+
     public ProductService productService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(@Qualifier("selfProductService") ProductService productService) {
         this.productService = productService;
     }
 
